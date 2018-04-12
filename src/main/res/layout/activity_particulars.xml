@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autobanner="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.lenovo.jd.view.activity.ParticularsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="商品详情"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <com.example.lenovo.jd.view.banner.AutoBanner
+        android:id="@+id/auto_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        autobanner:indicator_height="10dp"
+        autobanner:indicator_margin="10dp"
+        autobanner:indicator_width="10dp"
+        autobanner:ratio_wh="1"/>
+
+    <TextView
+        android:id="@+id/text_title_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/text_oldprice_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+    <TextView
+        android:id="@+id/text_newprice_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="#f00"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/text_addToCar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="加入购物车"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:padding="10dp"
+            android:background="@android:color/holo_red_light"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

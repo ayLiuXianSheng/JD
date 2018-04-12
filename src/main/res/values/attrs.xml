@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoBanner">
+        <attr name="indicator_width" format="dimension"></attr>
+        <attr name="indicator_height" format="dimension"></attr>
+        <attr name="indicator_margin" format="dimension"></attr>
+        <attr name="ratio_wh" format="float"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="item_count" format="integer" />
+    </declare-styleable>
+</resources>
