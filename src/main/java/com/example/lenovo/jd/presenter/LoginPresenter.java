@@ -36,7 +36,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
         if (view != null){
             String code = loginSuperClass.getCode();
             if ("0".equals(code)){
-                view.onSccuess(loginSuperClass.getMsg());
+                view.onSccuess(loginSuperClass);
             }else{
                 view.onFailed(loginSuperClass.getMsg());
             }

@@ -77,10 +77,13 @@ public class RegisterActivity extends BaseActivity<RegPresenter> implements View
                 presenter.reg(Api.HOME_NAME,tel,pass);
                 break;
             case R.id.iamge_weixin1:
+                Toast.makeText(this, "微信登录", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iamge_qq1:
+                Toast.makeText(this, "QQ登录", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iamge_weibo1:
+                Toast.makeText(this, "微博登录", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

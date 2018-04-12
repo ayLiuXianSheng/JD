@@ -1,6 +1,7 @@
 package com.example.lenovo.jd.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import com.example.lenovo.jd.presenter.LoginPresenter;
 import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.base.BaseActivity;
 import com.example.lenovo.jd.view.bean.LoginSuperClass;
+import com.example.lenovo.jd.view.fragment.MineFragment;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements View.OnClickListener,ILoginView {
 
@@ -34,6 +36,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements View.
     private ImageView mIamgeWeixin;
     private ImageView mIamgeQq;
     private ImageView mIamgeWeibo;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -61,6 +64,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements View.
         mIamgeQq.setOnClickListener(this);
         mIamgeWeibo = (ImageView) findViewById(R.id.iamge_weibo);
         mIamgeWeibo.setOnClickListener(this);
+        mSharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
     }
 
     @Override
@@ -83,10 +87,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements View.
                 startActivity(intent);
                 break;
             case R.id.iamge_weixin:
+                Toast.makeText(this, "微信登录", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iamge_qq:
+                Toast.makeText(this, "QQ登录", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iamge_weibo:
+                Toast.makeText(this, "微博登录", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -97,8 +104,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements View.
     }
 
     @Override
-    public void onSccuess(String str) {
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    public void onSccuess(LoginSuperClass loginSuperClass) {
+        Toast.makeText(this, loginSuperClass.getMsg(), Toast.LENGTH_SHORT).show();
+        /*Intent intent = new Intent(this,MineFragment.class);
+        startActivity(intent);*/
+        LoginSuperClass.DataBean data = loginSuperClass.getData();
+        SharedPreferences.Editor edit = mSharedPreferences.edit();
+        edit.putString("username",data.getUsername());//这是存数据
+        edit.putString("uid",data.getUid() + "");//这是存数据
+        edit.putString("icon",data.getIcon());//这是存数据
+        edit.commit();//这是将数据提交
+        finish();
     }
 
     @Override

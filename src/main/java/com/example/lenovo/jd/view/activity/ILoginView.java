@@ -9,5 +9,5 @@ import com.example.lenovo.jd.view.bean.LoginSuperClass;
 public interface ILoginView {
     void onFailed(String msg);
 
-    void onSccuess(String str);
+    void onSccuess(LoginSuperClass loginSuperClass);
 }
