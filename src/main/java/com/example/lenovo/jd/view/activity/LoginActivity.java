@@ -115,7 +115,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements View.
         edit.putString("username",data.getUsername());//这是存数据
         edit.putString("uid",data.getUid() + "");//这是存数据
         edit.putString("icon",data.getIcon());//这是存数据
-        edit.commit();//将数据提交
+        edit.commit();//这是将数据提交
         finish();
     }
 
