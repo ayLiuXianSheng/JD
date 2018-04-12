@@ -14,7 +14,9 @@ import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.base.BaseActivity;
 import com.example.lenovo.jd.view.bean.LoginSuperClass;
 import com.example.lenovo.jd.view.fragment.MineFragment;
-
+/**
+ * 登录
+ * */
 public class LoginActivity extends BaseActivity<LoginPresenter> implements View.OnClickListener,ILoginView {
 
     /**

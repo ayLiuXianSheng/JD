@@ -10,7 +10,9 @@ import com.example.lenovo.jd.R;
 import com.example.lenovo.jd.presenter.RegPresenter;
 import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.base.BaseActivity;
-
+/**
+ * 注册
+ * */
 public class RegisterActivity extends BaseActivity<RegPresenter> implements View.OnClickListener,IRegisterView {
 
     private ImageView mImgReturn;
