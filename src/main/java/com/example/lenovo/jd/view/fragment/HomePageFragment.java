@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.example.lenovo.jd.R;
 import com.example.lenovo.jd.presenter.HomePagePresenter;
 import com.example.lenovo.jd.view.activity.HomePageParticularsActivity;
 import com.example.lenovo.jd.view.activity.IHomePageView;
+import com.example.lenovo.jd.view.activity.SearchActivity;
 import com.example.lenovo.jd.view.adapter.MiddleAdapter;
 import com.example.lenovo.jd.view.adapter.MyAdapterHorizontal;
 import com.example.lenovo.jd.view.adapter.MyAdapterVertical;
@@ -46,6 +48,7 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
     private TextView mTexthView;
     private RecyclerView mRecyclehView;
     private TextView mTextvView;
+    private LinearLayout search_richScan,search_skip,search_message;
     private RecyclerView mRecyclevView;
     private MyAdapterHorizontal myAdapterHorizontal;
     private MyAdapterVertical myAdapterVertical;
@@ -68,6 +71,9 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
         middle_recycle = view.findViewById(R.id.middle_recycle);
         mMiddleRecycle = (RecyclerView) view.findViewById(R.id.middle_recycle);
         mTexthView = (TextView) view.findViewById(R.id.texth_view);
+        search_richScan = (LinearLayout) view.findViewById(R.id.search_richScan);
+        search_skip = (LinearLayout) view.findViewById(R.id.search_skip);
+        search_message = (LinearLayout) view.findViewById(R.id.search_message);
         mRecyclehView = (RecyclerView) view.findViewById(R.id.recycleh_view);
         mTextvView = (TextView) view.findViewById(R.id.textv_view);
         mRecyclevView = (RecyclerView) view.findViewById(R.id.recyclev_view);
@@ -85,6 +91,28 @@ public class HomePageFragment extends BaseFragment<HomePagePresenter> implements
         middle_recycle.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false));
 
         middle_recycle.setAdapter(middleAdapter);
+        //扫一扫
+        search_richScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "扫一扫", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //跳转到搜索
+        search_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        //消息
+        search_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "消息", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

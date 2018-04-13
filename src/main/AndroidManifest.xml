@@ -3,7 +3,7 @@
     package="com.example.lenovo.jd">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,15 +26,18 @@
         <activity android:name=".view.activity.UserInfoActivity" />
         <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.LoginActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.lenovo.my_application02_uploadingheadportrait_shangchuantouxiang.fileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".view.activity.SearchActivity"></activity>
     </application>
 
 </manifest>
