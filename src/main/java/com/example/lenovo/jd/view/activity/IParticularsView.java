@@ -11,4 +11,6 @@ public interface IParticularsView {
     void onFailed(String str);
 
     void onSuccess(ParticularsSuperClass.DataBean data);
+
+    void onAddToCarSuccess(String msg);
 }

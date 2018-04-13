@@ -52,17 +52,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
-            android:id="@+id/text_addToCar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="加入购物车"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:padding="10dp"
-            android:background="@android:color/holo_red_light"
-            android:layout_alignParentBottom="true"/>
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/text_addToCar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="加入购物车"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:background="#EEAD0E"/>
+            <TextView
+                android:id="@+id/text_buyImmediately"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="立即购买"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/holo_red_light"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

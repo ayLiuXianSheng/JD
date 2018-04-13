@@ -3,6 +3,7 @@ package com.example.lenovo.jd.view.api;
 import com.example.lenovo.jd.view.bean.AddToCarSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyLeftSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyRightSuperClass;
+import com.example.lenovo.jd.view.bean.DiscoverSuperClass;
 import com.example.lenovo.jd.view.bean.HomePageSuperClass;
 import com.example.lenovo.jd.view.bean.ListSuperClass;
 import com.example.lenovo.jd.view.bean.LoginSuperClass;
@@ -37,6 +38,9 @@ public interface ApiService {
     //添加购物车
     @GET("product/addCart")
     Observable<AddToCarSuperClass> getAddToCarData(@Query("uid")String uid, @Query("pid")String pid, @Query("source")String android);
+    //发现
+    @GET("product/searchProducts")
+    Observable<DiscoverSuperClass> getDiscoverData(@Query("keywords")String keywords, @Query("page")String page, @Query("source")String android);
     //查询购物车
     @GET("product/getCarts")
     Observable<ShoppingCartSuperClass> getShoppingCartData(@Query("uid")String uid, @Query("source")String android);

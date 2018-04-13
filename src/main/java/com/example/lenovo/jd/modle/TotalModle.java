@@ -1,6 +1,7 @@
 package com.example.lenovo.jd.modle;
 
 import com.example.lenovo.jd.presenter.IClassifyPresenter;
+import com.example.lenovo.jd.presenter.IDiscoverPresenter;
 import com.example.lenovo.jd.presenter.IHomePagePresenter;
 import com.example.lenovo.jd.presenter.IListPresenter;
 import com.example.lenovo.jd.presenter.ILoginPresenter;
@@ -8,8 +9,10 @@ import com.example.lenovo.jd.presenter.IParticularsPresenter;
 import com.example.lenovo.jd.presenter.IRegPresenter;
 import com.example.lenovo.jd.presenter.IShoppingCartPresenter;
 import com.example.lenovo.jd.view.api.ApiService;
+import com.example.lenovo.jd.view.bean.AddToCarSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyLeftSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyRightSuperClass;
+import com.example.lenovo.jd.view.bean.DiscoverSuperClass;
 import com.example.lenovo.jd.view.bean.HomePageSuperClass;
 import com.example.lenovo.jd.view.bean.ListSuperClass;
 import com.example.lenovo.jd.view.bean.LoginSuperClass;
@@ -179,6 +182,56 @@ public class TotalModle implements ITotalModle {
                     @Override
                     public void onNext(ParticularsSuperClass particularsSuperClass) {
                         iParticularsPresenter.onSuccess(particularsSuperClass.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void addToCar(String path, String uid, String pid, String android, final IParticularsPresenter iParticularsPresenter) {
+        retrofitUtils = RetrofitUtils.getInData();
+        ApiService apiService = retrofitUtils.getRetrofit(path, ApiService.class);
+        Observable<AddToCarSuperClass> observable = apiService.getAddToCarData(uid, pid, android);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<AddToCarSuperClass>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iParticularsPresenter.onFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(AddToCarSuperClass addToCarSuperClass) {
+                        iParticularsPresenter.onAddToCarSuccess(addToCarSuperClass);
+                    }
+                });
+    }
+
+    @Override
+    public void discover(String path, String keywords, String page, String android, final IDiscoverPresenter iDiscoverPresenter) {
+        retrofitUtils = RetrofitUtils.getInData();
+        ApiService apiService = retrofitUtils.getRetrofit(path, ApiService.class);
+        Observable<DiscoverSuperClass> observable = apiService.getDiscoverData(keywords, page, android);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<DiscoverSuperClass>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iDiscoverPresenter.onFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(DiscoverSuperClass discoverSuperClass) {
+                        iDiscoverPresenter.onSuccess(discoverSuperClass.getData());
                     }
                 });
     }

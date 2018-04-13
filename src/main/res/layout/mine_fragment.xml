@@ -57,10 +57,12 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="5dp">
                     <TextView
+                        android:id="@+id/text_jxz"
                         style="@style/text_flag_01"
                         android:text="京享值203"
                         android:visibility="gone"/>
                     <TextView
+                        android:id="@+id/text_xbxy"
                         style="@style/text_flag_01"
                         android:text="小白信用66.3"
                         android:visibility="gone"/>

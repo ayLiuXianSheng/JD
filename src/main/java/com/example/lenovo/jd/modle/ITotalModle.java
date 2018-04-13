@@ -1,6 +1,7 @@
 package com.example.lenovo.jd.modle;
 
 import com.example.lenovo.jd.presenter.IClassifyPresenter;
+import com.example.lenovo.jd.presenter.IDiscoverPresenter;
 import com.example.lenovo.jd.presenter.IHomePagePresenter;
 import com.example.lenovo.jd.presenter.IListPresenter;
 import com.example.lenovo.jd.presenter.ILoginPresenter;
@@ -24,6 +25,10 @@ public interface ITotalModle {
     void list(String path,String pscid,String page, IListPresenter iListPresenter);
 
     void particulars(String path, String pid, String android, IParticularsPresenter iParticularsPresenter);
+
+    void addToCar(String path, String uid, String pid, String android, IParticularsPresenter iParticularsPresenter);
+
+    void discover(String path,String keywords,String page,String android, IDiscoverPresenter iDiscoverPresenter);
 
     void shoppingCart(String path, String uid, String android, IShoppingCartPresenter iShoppingCartPresenter);
 

@@ -1,18 +1,27 @@
 package com.example.lenovo.jd.view.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.lenovo.jd.R;
 import com.example.lenovo.jd.view.activity.LoginActivity;
-import com.example.lenovo.jd.view.activity.RegisterActivity;
 import com.example.lenovo.jd.view.activity.UserInfoActivity;
 import com.example.lenovo.jd.view.base.BaseFragment;
 import com.example.lenovo.jd.view.base.BasePresenter;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * 我的
@@ -42,7 +51,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ImageView mImgSq;
     private ImageView mImgKffw;
     private LinearLayout mTextJdcs;
-    private Intent intent;
+    private Intent intent, intentJump;
+    private SharedPreferences mSharedPreferences;
+    /**
+     * 京享值203
+     */
+    private TextView mTextJxz;
+    /**
+     * 小白信用66.3
+     */
+    private TextView mTextXbxy;
 
     @Override
     protected int getLayoutId() {
@@ -101,12 +119,38 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mImgKffw.setOnClickListener(this);
         mTextJdcs = (LinearLayout) view.findViewById(R.id.text_jdcs);
         mTextJdcs.setOnClickListener(this);
-        intent = new Intent(getActivity(),LoginActivity.class);
+        intent = new Intent(getActivity(), LoginActivity.class);
+        intentJump = new Intent(getActivity(), UserInfoActivity.class);
+        mTextJxz = (TextView) view.findViewById(R.id.text_jxz);
+        mTextXbxy = (TextView) view.findViewById(R.id.text_xbxy);
+        mSharedPreferences = getContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+
     }
 
     @Override
     protected void getData() {
-
+        String username = mSharedPreferences.getString("username", "");//这是获取值
+        String uid = mSharedPreferences.getString("uid", "");
+        String icon = mSharedPreferences.getString("icon", "");
+        if (!"".equals(username)) {
+            mUserName.setText(username);
+            if (!"".equals(icon) && icon != null){
+                Glide.with(this)
+                        .load(icon)
+                        .bitmapTransform(new RoundedCornersTransformation(getContext(), 100, 5))
+                        .into(mUserHead);
+            }
+            mTextJxz.setVisibility(View.VISIBLE);
+            mTextXbxy.setVisibility(View.VISIBLE);
+        }else {
+            mUserName.setText("登录/注册");
+            Glide.with(this)
+                    .load(R.mipmap.user)
+                    .bitmapTransform(new RoundedCornersTransformation(getContext(), 100, 5))
+                    .into(mUserHead);
+            mTextJxz.setVisibility(View.GONE);
+            mTextXbxy.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -116,94 +160,108 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.my_set_hei:
                 //设置
-                Toast.makeText(getContext(),"设置",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "设置", Toast.LENGTH_LONG).show();
                 break;
             case R.id.my_message_hei:
                 //设置
-                Toast.makeText(getContext(),"消息",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "消息", Toast.LENGTH_LONG).show();
                 break;
             case R.id.user_head:
                 //头像
                 /*Toast.makeText(getContext(),"头像",Toast.LENGTH_LONG).show();*/
-                startActivity(intent);
+                if ("登录/注册".equals(mUserName.getText().toString().trim())) {
+                    startActivity(intent);
+                } else {
+                    startActivity(intentJump);
+                }
                 break;
             case R.id.user_name:
                 //用户名
                 /*Toast.makeText(getContext(),"用户名",Toast.LENGTH_LONG).show();*/
-                startActivity(intent);
+                if ("登录/注册".equals(mUserName.getText().toString().trim())) {
+                    startActivity(intent);
+                } else {
+                    startActivity(intentJump);
+                }
                 break;
             case R.id.img_dfk:
                 //待付款
-                Toast.makeText(getContext(),"待付款",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "待付款", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_dsh:
                 //待收货
-                Toast.makeText(getContext(),"待收货",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "待收货", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_dpj:
                 //待评价
-                Toast.makeText(getContext(),"待评价",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "待评价", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_thsh:
                 //退换/售后
-                Toast.makeText(getContext(),"退换/售后",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "退换/售后", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_wddd:
                 //我的订单
-                Toast.makeText(getContext(),"我的订单",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "我的订单", Toast.LENGTH_LONG).show();
                 break;
             case R.id.test_jd:
                 //京豆
-                Toast.makeText(getContext(),"京豆",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "京豆", Toast.LENGTH_LONG).show();
                 break;
             case R.id.test_yhq:
                 //优惠券
-                Toast.makeText(getContext(),"优惠券",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "优惠券", Toast.LENGTH_LONG).show();
                 break;
             case R.id.test_bt:
                 //白条
-                Toast.makeText(getContext(),"白条",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "白条", Toast.LENGTH_LONG).show();
                 break;
             case R.id.test_jdxjk:
                 //京东小金库
-                Toast.makeText(getContext(),"京东小金库",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "京东小金库", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_wdqb:
                 //我的钱包
-                Toast.makeText(getContext(),"我的钱包",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "我的钱包", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text_spgz:
                 //商品关注
-                Toast.makeText(getContext(),"商品关注",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "商品关注", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text_dpgz:
                 //店铺关注
-                Toast.makeText(getContext(),"店铺关注",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "店铺关注", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text_nrsc:
                 //内容收藏
-                Toast.makeText(getContext(),"内容收藏",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "内容收藏", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text_lljl:
                 //浏览记录
-                Toast.makeText(getContext(),"浏览记录",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "浏览记录", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_wdhd:
                 //我的活动
-                Toast.makeText(getContext(),"我的活动",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "我的活动", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_sq:
                 //社区
-                Toast.makeText(getContext(),"社区",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "社区", Toast.LENGTH_LONG).show();
                 break;
             case R.id.img_kffw:
                 //客户服务
-                Toast.makeText(getContext(),"客户服务",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "客户服务", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text_jdcs:
                 //京东超市
-                Toast.makeText(getContext(),"京东超市",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "京东超市", Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 }

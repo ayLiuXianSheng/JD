@@ -5,6 +5,7 @@ import com.example.lenovo.jd.modle.ITotalModle;
 import com.example.lenovo.jd.modle.TotalModle;
 import com.example.lenovo.jd.view.activity.IParticularsView;
 import com.example.lenovo.jd.view.base.BasePresenter;
+import com.example.lenovo.jd.view.bean.AddToCarSuperClass;
 import com.example.lenovo.jd.view.bean.ParticularsSuperClass;
 
 /**
@@ -25,6 +26,11 @@ public class ParticularsPresenter extends BasePresenter<IParticularsView> implem
     }
 
     @Override
+    public void addToCar(String path, String uid, String pid, String android) {
+        iTotalModle.addToCar(path,uid,pid,android,this);
+    }
+
+    @Override
     public void onFailed(String str) {
         if (view != null){
             view.onFailed(str);
@@ -35,6 +41,18 @@ public class ParticularsPresenter extends BasePresenter<IParticularsView> implem
     public void onSuccess(ParticularsSuperClass.DataBean data) {
         if (view != null){
             view.onSuccess(data);
+        }
+    }
+
+    @Override
+    public void onAddToCarSuccess(AddToCarSuperClass addToCarSuperClass) {
+        if (view != null){
+            String code = addToCarSuperClass.getCode();
+            if ("0".equals(code)){
+                view.onAddToCarSuccess(addToCarSuperClass.getMsg());
+            }else{
+                view.onFailed(addToCarSuperClass.getMsg());
+            }
         }
     }
 
