@@ -1,6 +1,8 @@
 package com.example.lenovo.jd.view.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import com.example.lenovo.jd.view.base.BaseFragment;
 import com.example.lenovo.jd.view.bean.ShoppingCartSuperClass;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * 购物车
@@ -50,6 +54,8 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private List<ShoppingCartSuperClass.DataBean> list;
     private int num = 0;
     private double price = 0.00;
+    private SharedPreferences mSharedPreferences;
+    private boolean flag = false;
 
     @Override
     protected int getLayoutId() {
@@ -73,11 +79,12 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         adapter = new MyExpandableAdapter(getContext());
         adapter.setOnClickAddAndSub(this);
         adapter.setOnSetChecked(this);
+        mSharedPreferences = getContext().getSharedPreferences("userInfo", MODE_PRIVATE);
     }
 
     @Override
     protected void getData() {
-        presenter.shoppingCart(Api.HOME_NAME, "2584", "android");
+        judge();
         mExpandList.setAdapter(adapter);
         mExpandList.setGroupIndicator(null);
         mBtnCheckAll.setOnClickListener(new View.OnClickListener() {
@@ -87,11 +94,30 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 statisticsPrice();
             }
         });
+        //判断点击按钮
+        mBtnEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flag = !flag;
+                if (flag){
+                    mBtnEditor.setText("完成");
+                }else {
+                    mBtnEditor.setText("编辑");
+                }
+                adapter.setFlag(flag);
+            }
+        });
+    }
+
+    private void judge() {
+        String uid = mSharedPreferences.getString("uid", "2584");
+        presenter.shoppingCart(Api.HOME_NAME, uid, "android");
     }
 
     @Override
     public void onFailed(String str) {
-        Toast.makeText(getContext(), str, Toast.LENGTH_LONG).show();
+        Log.i("TAG",str);
+        /*Toast.makeText(getContext(), str, Toast.LENGTH_LONG).show();*/
     }
 
     @Override
@@ -228,5 +254,11 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         //设置文本信息 合计、结算的商品数量
         mTvTotalPrice.setText("合计:￥"+price);
         mBtnAmount.setText("结算("+num+")");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        judge();
     }
 }

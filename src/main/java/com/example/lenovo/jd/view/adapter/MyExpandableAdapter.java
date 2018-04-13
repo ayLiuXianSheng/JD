@@ -25,6 +25,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
     private List<ShoppingCartSuperClass.DataBean> list;
     private OnClickAddAndSub onClickAddAndSub;
     private OnSetChecked onSetChecked;
+    private boolean flag;
 
     public MyExpandableAdapter(Context context) {
         this.context = context;
@@ -41,6 +42,11 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 
     public void setOnSetChecked(OnSetChecked onSetChecked) {
         this.onSetChecked = onSetChecked;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -168,6 +174,24 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 onSetChecked.childChecked(groupPosition,childPosition,((CheckBox)v).isChecked());
+            }
+        });
+
+        if (flag){
+            holder.btn_commodity_delete.setVisibility(View.VISIBLE);
+        }else {
+            holder.btn_commodity_delete.setVisibility(View.GONE);
+        }
+
+
+        holder.btn_commodity_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.get(groupPosition).getList().remove(childPosition);
+                if (list.get(groupPosition).getList().size() == 0){
+                    list.remove(groupPosition);
+                }
+                notifyDataSetChanged();
             }
         });
 

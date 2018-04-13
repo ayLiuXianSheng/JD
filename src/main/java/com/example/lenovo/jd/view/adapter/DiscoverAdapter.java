@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,16 +37,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.ViewHo
 
     @Override
     public DiscoverAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        /*ViewHolder holder = null;
-        if (type == 1){
-
-            View view = LayoutInflater.from(context).inflate(R.layout.linear_layout, parent,false);
-            holder = new ViewHolder(view);
-        }else if (type == 2){
-            View view = LayoutInflater.from(context).inflate(R.layout.grid_layout, parent,false);
-            holder = new ViewHolder(view);
-        }*/
-        View view = LayoutInflater.from(context).inflate(R.layout.linear_layout, parent,false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.grid_layout, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

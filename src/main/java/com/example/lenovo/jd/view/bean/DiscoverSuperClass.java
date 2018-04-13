@@ -67,7 +67,7 @@ public class DiscoverSuperClass {
          * title : 一加手机5 (A5000) 6GB+64GB 月岩灰 全网通 双卡双待 移动联通电信4G手机
          */
 
-        private int bargainPrice;
+        private double bargainPrice;
         private String createtime;
         private String detailUrl;
         private String images;
@@ -80,11 +80,11 @@ public class DiscoverSuperClass {
         private String subhead;
         private String title;
 
-        public int getBargainPrice() {
+        public double getBargainPrice() {
             return bargainPrice;
         }
 
-        public void setBargainPrice(int bargainPrice) {
+        public void setBargainPrice(double bargainPrice) {
             this.bargainPrice = bargainPrice;
         }
 

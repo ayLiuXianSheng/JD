@@ -1,5 +1,7 @@
 package com.example.lenovo.jd.view.fragment;
 
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -41,6 +43,7 @@ public class DiscoverFragment extends BaseFragment<DiscoverPresenter> implements
     private int page = 1;
     private String keywords;
     private List<DiscoverSuperClass.DataBean> listAll;
+    private boolean flag = false;
 
     @Override
     protected int getLayoutId() {
@@ -57,7 +60,9 @@ public class DiscoverFragment extends BaseFragment<DiscoverPresenter> implements
     protected void initView(View view) {
 
         mImageGrid = (ImageView) view.findViewById(R.id.image_grid);
+        mImageGrid.setOnClickListener(this);
         mImageLv = (ImageView) view.findViewById(R.id.image_linear);
+        mImageLv.setOnClickListener(this);
         mDiscoverEditText = (EditText) view.findViewById(R.id.discover_edit_text);
         mDiscoverBtnSearch = (Button) view.findViewById(R.id.discover_btn_search);
         mDiscoverBtnSearch.setOnClickListener(this);
@@ -70,7 +75,7 @@ public class DiscoverFragment extends BaseFragment<DiscoverPresenter> implements
     protected void getData() {
         presenter.discover(Api.HOME_NAME,"电脑",page + "","android");
 
-        mDiscoverRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        judge();
 
         mDiscoverRecycleView.setAdapter(adapter);
 
@@ -95,6 +100,16 @@ public class DiscoverFragment extends BaseFragment<DiscoverPresenter> implements
         });
     }
 
+
+    private void judge(){
+        if (flag){
+            mDiscoverRecycleView.setLayoutManager(new GridLayoutManager(getContext(),2));
+            mDiscoverRecycleView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.HORIZONTAL));
+        }else {
+            mDiscoverRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+            mDiscoverRecycleView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -106,10 +121,16 @@ public class DiscoverFragment extends BaseFragment<DiscoverPresenter> implements
                 presenter.discover(Api.HOME_NAME, keywords,page + "","android");
                 break;
             case R.id.image_grid:
-
+                mImageGrid.setVisibility(View.GONE);
+                mImageLv.setVisibility(View.VISIBLE);
+                flag = true;
+                judge();
                 break;
             case R.id.image_linear:
-
+                mImageGrid.setVisibility(View.VISIBLE);
+                mImageLv.setVisibility(View.GONE);
+                flag = false;
+                judge();
                 break;
         }
     }

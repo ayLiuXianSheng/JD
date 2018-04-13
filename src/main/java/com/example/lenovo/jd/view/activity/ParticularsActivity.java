@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +69,7 @@ public class ParticularsActivity extends BaseActivity<ParticularsPresenter> impl
 
     private void receiveData(){
         final String username = mSharedPreferences.getString("username", "登录/注册");//这是获取值
-        final String uid = mSharedPreferences.getString("uid", "4582");
+        final String uid = mSharedPreferences.getString("uid", "2584");
         text_addToCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
