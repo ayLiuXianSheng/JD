@@ -11,6 +11,7 @@ import com.example.lenovo.jd.view.bean.ParticularsSuperClass;
 import com.example.lenovo.jd.view.bean.RegisterSuperClass;
 import com.example.lenovo.jd.view.bean.ShoppingCartSuperClass;
 
+import okhttp3.MultipartBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -50,4 +51,7 @@ public interface ApiService {
     //注册
     @GET("user/reg")
     Observable<RegisterSuperClass> getRegisterData(@Query("mobile")String mobile, @Query("password")String password);
+    //上传头像
+    @GET("file/upload")
+    Observable<RegisterSuperClass> getUploadPhotoData(@Query("uid")String uid, @Query("file")MultipartBody.Part file);
 }

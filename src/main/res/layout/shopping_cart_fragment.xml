@@ -18,7 +18,7 @@
         android:id="@+id/login_immediately"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="请先登录账号"
+        android:text="购物车是空的"
         android:textColor="#f00"
         android:visibility="gone"
         android:layout_weight="1"

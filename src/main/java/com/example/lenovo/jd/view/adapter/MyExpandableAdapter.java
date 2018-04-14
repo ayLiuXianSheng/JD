@@ -146,7 +146,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
         holder.ck_child_choosed.setChecked(list.get(groupPosition).getList().get(childPosition).isChildChoosed());
         holder.tv_commodity_name.setText(list.get(groupPosition).getList().get(childPosition).getTitle());
         holder.tv_commodity_attr.setText(list.get(groupPosition).getList().get(childPosition).getSubhead());
-        holder.tv_commodity_price.setText("￥"+list.get(groupPosition).getList().get(childPosition).getPrice());
+        holder.tv_commodity_price.setText("￥"+list.get(groupPosition).getList().get(childPosition).getBargainPrice());
         holder.tv_commodity_num.setText("x"+list.get(groupPosition).getList().get(childPosition).getNum());
         holder.tv_commodity_show_num.setText(list.get(groupPosition).getList().get(childPosition).getNum()+"");
 

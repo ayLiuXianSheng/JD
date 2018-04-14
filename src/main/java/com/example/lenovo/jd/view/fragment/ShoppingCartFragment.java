@@ -1,5 +1,6 @@
 package com.example.lenovo.jd.view.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +14,17 @@ import android.widget.Toast;
 
 import com.example.lenovo.jd.R;
 import com.example.lenovo.jd.presenter.ShoppingCartPresenter;
+import com.example.lenovo.jd.view.activity.ConfirmAnOrderActivity;
 import com.example.lenovo.jd.view.activity.IShoppingCartView;
+import com.example.lenovo.jd.view.activity.ParticularsActivity;
 import com.example.lenovo.jd.view.adapter.MyExpandableAdapter;
 import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.base.BaseFragment;
+import com.example.lenovo.jd.view.bean.DataBean;
 import com.example.lenovo.jd.view.bean.ShoppingCartSuperClass;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,10 +35,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements IShoppingCartView, MyExpandableAdapter.OnClickAddAndSub, MyExpandableAdapter.OnSetChecked {
     private View view;
-    /**
-     * 返回
-     */
-    private TextView mBtnBack;
     /**
      * 编辑
      */
@@ -58,6 +60,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private SharedPreferences mSharedPreferences;
     private boolean flag = false;
     private String uid;
+    private List<DataBean> dataBeans;
 
     @Override
     protected int getLayoutId() {
@@ -72,7 +75,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     protected void initView(View view) {
-        mBtnBack = (TextView) view.findViewById(R.id.btnBack);
         mBtnEditor = (TextView) view.findViewById(R.id.btnEditor);
         mExpandList = (ExpandableListView) view.findViewById(R.id.expand_list);
         login_immediately = (TextView) view.findViewById(R.id.login_immediately);
@@ -83,6 +85,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         adapter.setOnClickAddAndSub(this);
         adapter.setOnSetChecked(this);
         mSharedPreferences = getContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+        dataBeans = new ArrayList<>();
     }
 
     @Override
@@ -110,6 +113,25 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     mBtnEditor.setText("编辑");
                 }
                 adapter.setFlag(flag);
+            }
+        });
+        //点击结算
+        mBtnAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (0 != num){
+                    num = 0;
+                    dataBeans.clear();
+                    statisticsNum();
+                    Intent intent = new Intent(getActivity(),ConfirmAnOrderActivity.class);
+                    intent.putExtra("dataBeans",(Serializable) dataBeans);
+                    startActivity(intent);
+                    mBtnCheckAll.setChecked(false);
+                    mTvTotalPrice.setText("合计:￥0.00");
+                    mBtnAmount.setText("结算(0)");
+                }else {
+                    Toast.makeText(getContext(),"请选择要购买的商品",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -263,13 +285,29 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             for (ShoppingCartSuperClass.DataBean.ListBean listBean : dataBean.getList()){
                 if (listBean.isChildChoosed()){
                     num++;
-                    price += listBean.getPrice() * listBean.getNum();
+                    price += listBean.getBargainPrice() * listBean.getNum();
                 }
             }
         }
         //设置文本信息 合计、结算的商品数量
         mTvTotalPrice.setText("合计:￥"+price);
         mBtnAmount.setText("结算("+num+")");
+    }
+
+    private void statisticsNum() {
+        for (ShoppingCartSuperClass.DataBean dataBean : list){
+            for (ShoppingCartSuperClass.DataBean.ListBean listBean : dataBean.getList()){
+                if (listBean.isChildChoosed()){
+                    DataBean bean = new DataBean();
+                    bean.setImages(listBean.getImages());
+                    bean.setTitle(listBean.getTitle());
+                    bean.setNum(listBean.getNum());
+                    bean.setPrice(listBean.getPrice());
+                    bean.setBargainPrice(listBean.getBargainPrice());
+                    dataBeans.add(bean);
+                }
+            }
+        }
     }
 
     @Override

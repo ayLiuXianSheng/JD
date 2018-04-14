@@ -236,6 +236,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         if (imagePath != null) {
             // 拿着imagePath上传了
             // ...
+            File file = new File(imagePath);
+
         }
     }
 

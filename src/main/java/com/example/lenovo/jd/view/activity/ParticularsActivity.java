@@ -16,8 +16,10 @@ import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.banner.AccordionTransformer;
 import com.example.lenovo.jd.view.banner.AutoBanner;
 import com.example.lenovo.jd.view.base.BaseActivity;
+import com.example.lenovo.jd.view.bean.DataBean;
 import com.example.lenovo.jd.view.bean.ParticularsSuperClass;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -33,6 +35,7 @@ public class ParticularsActivity extends BaseActivity<ParticularsPresenter> impl
     private ParticularsSuperClass.DataBean dataBean;
     private List<String> mImgUrls;
     private SharedPreferences mSharedPreferences;
+    private List<DataBean> dataBeans;
 
     @Override
     protected int getLayoutId() {
@@ -56,6 +59,7 @@ public class ParticularsActivity extends BaseActivity<ParticularsPresenter> impl
         text_buyImmediately = (TextView) findViewById(R.id.text_buyImmediately);
         mImgUrls = new ArrayList<>();
         mSharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+        dataBeans = new ArrayList<>();
 
     }
 
@@ -75,6 +79,28 @@ public class ParticularsActivity extends BaseActivity<ParticularsPresenter> impl
             public void onClick(View v) {
                 if (!"登录/注册".equals(username)){
                     presenter.addToCar(Api.HOME_NAME,uid,dataBean.getPid() + "","android");
+                }else {
+                    Toast.makeText(ParticularsActivity.this,"请先登录账号",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ParticularsActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        text_buyImmediately.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!"登录/注册".equals(username)){
+                    dataBeans.clear();
+                    Intent intent = new Intent(ParticularsActivity.this,ConfirmAnOrderActivity.class);
+                    DataBean bean = new DataBean();
+                    bean.setImages(dataBean.getImages());
+                    bean.setTitle(dataBean.getTitle());
+                    bean.setNum(1);
+                    bean.setPrice(dataBean.getPrice());
+                    bean.setBargainPrice(dataBean.getBargainPrice());
+                    dataBeans.add(bean);
+                    intent.putExtra("dataBeans",(Serializable) dataBeans);
+                    startActivity(intent);
                 }else {
                     Toast.makeText(ParticularsActivity.this,"请先登录账号",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ParticularsActivity.this,LoginActivity.class);
