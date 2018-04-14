@@ -38,6 +38,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
      */
     private TextView mBtnEditor;
     private ExpandableListView mExpandList;
+    private TextView login_immediately;
     /**
      * 全选
      */
@@ -56,6 +57,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private double price = 0.00;
     private SharedPreferences mSharedPreferences;
     private boolean flag = false;
+    private String uid;
 
     @Override
     protected int getLayoutId() {
@@ -73,6 +75,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         mBtnBack = (TextView) view.findViewById(R.id.btnBack);
         mBtnEditor = (TextView) view.findViewById(R.id.btnEditor);
         mExpandList = (ExpandableListView) view.findViewById(R.id.expand_list);
+        login_immediately = (TextView) view.findViewById(R.id.login_immediately);
         mBtnCheckAll = (CheckBox) view.findViewById(R.id.btnCheckAll);
         mTvTotalPrice = (TextView) view.findViewById(R.id.tvTotalPrice);
         mBtnAmount = (TextView) view.findViewById(R.id.btnAmount);
@@ -90,8 +93,10 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         mBtnCheckAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAllChecked(((CheckBox)v).isChecked());
-                statisticsPrice();
+                if (!"".equals(uid)){
+                    isAllChecked(((CheckBox)v).isChecked());
+                    statisticsPrice();
+                }
             }
         });
         //判断点击按钮
@@ -110,8 +115,19 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     }
 
     private void judge() {
-        String uid = mSharedPreferences.getString("uid", "2584");
-        presenter.shoppingCart(Api.HOME_NAME, uid, "android");
+        uid = mSharedPreferences.getString("uid", "");
+        if (!"".equals(uid)){
+            mExpandList.setVisibility(View.VISIBLE);
+            login_immediately.setVisibility(View.GONE);
+            presenter.shoppingCart(Api.HOME_NAME, uid, "android");
+        }else {
+            if (list != null){
+                list.clear();
+                adapter.notifyDataSetChanged();
+            }
+            mExpandList.setVisibility(View.GONE);
+            login_immediately.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

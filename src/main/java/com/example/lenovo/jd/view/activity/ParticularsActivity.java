@@ -69,7 +69,7 @@ public class ParticularsActivity extends BaseActivity<ParticularsPresenter> impl
 
     private void receiveData(){
         final String username = mSharedPreferences.getString("username", "登录/注册");//这是获取值
-        final String uid = mSharedPreferences.getString("uid", "2584");
+        final String uid = mSharedPreferences.getString("uid", "");
         text_addToCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
