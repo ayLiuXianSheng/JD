@@ -1,17 +1,20 @@
 package com.example.lenovo.jd.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.lenovo.jd.R;
+import com.example.lenovo.jd.presenter.CreateOrderPresenter;
+import com.example.lenovo.jd.view.api.Api;
 import com.example.lenovo.jd.view.base.BaseActivity;
-import com.example.lenovo.jd.view.base.BasePresenter;
+
 /**
  * 选择支付方式
  * */
-public class ModeOfPaymentActivity extends BaseActivity {
+public class ModeOfPaymentActivity extends BaseActivity<CreateOrderPresenter> implements ICreateOrderView {
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -19,19 +22,37 @@ public class ModeOfPaymentActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter getPresenter() {
-        return null;
+    protected CreateOrderPresenter getPresenter() {
+        presenter = new CreateOrderPresenter(this);
+        return presenter;
     }
 
     @Override
     protected void initView() {
-
+        mSharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
     }
 
     @Override
     protected void getData() {
         Intent intent = getIntent();
         String price = intent.getStringExtra("price");
-        Toast.makeText(this,price,Toast.LENGTH_LONG).show();
+        String uid = mSharedPreferences.getString("uid", "");
+        presenter.createOrder(Api.HOME_NAME,uid,price);
+    }
+
+    @Override
+    public void onFailed(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSucces(String str) {
+        Toast.makeText(this,str,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestory();
     }
 }

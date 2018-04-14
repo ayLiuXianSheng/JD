@@ -3,6 +3,7 @@ package com.example.lenovo.jd.view.api;
 import com.example.lenovo.jd.view.bean.AddToCarSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyLeftSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyRightSuperClass;
+import com.example.lenovo.jd.view.bean.CreateOrderSuperClass;
 import com.example.lenovo.jd.view.bean.DiscoverSuperClass;
 import com.example.lenovo.jd.view.bean.HomePageSuperClass;
 import com.example.lenovo.jd.view.bean.ListSuperClass;
@@ -51,7 +52,10 @@ public interface ApiService {
     //注册
     @GET("user/reg")
     Observable<RegisterSuperClass> getRegisterData(@Query("mobile")String mobile, @Query("password")String password);
-    //上传头像
+    /*//上传头像
     @GET("file/upload")
-    Observable<RegisterSuperClass> getUploadPhotoData(@Query("uid")String uid, @Query("file")MultipartBody.Part file);
+    Observable<> getUploadPhotoData(@Query("uid")String uid, @Query("file")MultipartBody.Part file);*/
+    //创建订单
+    @GET("product/createOrder")
+    Observable<CreateOrderSuperClass> getCreateOrderData(@Query("uid")String uid, @Query("price")String price);
 }

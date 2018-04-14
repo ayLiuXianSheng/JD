@@ -1,6 +1,7 @@
 package com.example.lenovo.jd.modle;
 
 import com.example.lenovo.jd.presenter.IClassifyPresenter;
+import com.example.lenovo.jd.presenter.ICreateOrderPresenter;
 import com.example.lenovo.jd.presenter.IDiscoverPresenter;
 import com.example.lenovo.jd.presenter.IHomePagePresenter;
 import com.example.lenovo.jd.presenter.IListPresenter;
@@ -12,6 +13,7 @@ import com.example.lenovo.jd.view.api.ApiService;
 import com.example.lenovo.jd.view.bean.AddToCarSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyLeftSuperClass;
 import com.example.lenovo.jd.view.bean.ClassifyRightSuperClass;
+import com.example.lenovo.jd.view.bean.CreateOrderSuperClass;
 import com.example.lenovo.jd.view.bean.DiscoverSuperClass;
 import com.example.lenovo.jd.view.bean.HomePageSuperClass;
 import com.example.lenovo.jd.view.bean.ListSuperClass;
@@ -307,6 +309,31 @@ public class TotalModle implements ITotalModle {
                     @Override
                     public void onNext(RegisterSuperClass registerSuperClass) {
                         iRegPresenter.onSuccess(registerSuperClass);
+                    }
+                });
+    }
+
+    @Override
+    public void createOrder(String path, String uid, String price, final ICreateOrderPresenter iCreateOrderPresenter) {
+        retrofitUtils = RetrofitUtils.getInData();
+        ApiService apiService = retrofitUtils.getRetrofit(path, ApiService.class);
+        Observable<CreateOrderSuperClass> observable = apiService.getCreateOrderData(uid, price);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CreateOrderSuperClass>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iCreateOrderPresenter.onFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(CreateOrderSuperClass createOrderSuperClass) {
+                        iCreateOrderPresenter.onSucces(createOrderSuperClass);
                     }
                 });
     }

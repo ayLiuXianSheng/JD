@@ -1,6 +1,7 @@
 package com.example.lenovo.jd.modle;
 
 import com.example.lenovo.jd.presenter.IClassifyPresenter;
+import com.example.lenovo.jd.presenter.ICreateOrderPresenter;
 import com.example.lenovo.jd.presenter.IDiscoverPresenter;
 import com.example.lenovo.jd.presenter.IHomePagePresenter;
 import com.example.lenovo.jd.presenter.IListPresenter;
@@ -35,4 +36,6 @@ public interface ITotalModle {
     void login(String path,String mobile,String password, ILoginPresenter iLoginPresenter);
 
     void reg(String path,String mobile,String password, IRegPresenter iRegPresenter);
+
+    void createOrder(String path, String uid,String price,ICreateOrderPresenter iCreateOrderPresenter);
 }
