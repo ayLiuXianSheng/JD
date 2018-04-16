@@ -132,6 +132,7 @@
     <orderEntry type="library" name="com.android.support:appcompat-v7-26.1.0" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-gson:2.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:26.1.0@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:E.\studioWorspace\BigTraining\JD\app\libs\alipaySdk-20180403.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-26.1.0" level="project" />
     <orderEntry type="library" name="com.hjm:BottomTabBar-1.1.1" level="project" />
