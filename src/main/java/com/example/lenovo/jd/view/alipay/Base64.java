@@ -1,9 +1,5 @@
 package com.example.lenovo.jd.view.alipay;
 
-/**
- * Created by lenovo on 2018/4/16.
- */
-
 public final class Base64 {
 
     private static final int BASELENGTH = 128;
@@ -66,8 +62,7 @@ public final class Base64 {
     /**
      * Encodes hex octects into Base64
      *
-     * @param binaryData
-     *            Array containing binaryData
+     * @param binaryData Array containing binaryData
      * @return Encoded Base64 array
      */
     public static String encode(byte[] binaryData) {
@@ -149,8 +144,7 @@ public final class Base64 {
     /**
      * Decodes Base64 data into octects
      *
-     * @param encoded
-     *            string containing Base64 data
+     * @param encoded string containing Base64 data
      * @return Array containind decoded data.
      */
     public static byte[] decode(String encoded) {
@@ -250,8 +244,7 @@ public final class Base64 {
     /**
      * remove WhiteSpace from MIME containing encoded Base64 data.
      *
-     * @param data
-     *            the byte array of base64 data (with WS)
+     * @param data the byte array of base64 data (with WS)
      * @return the new length
      */
     private static int removeWhiteSpace(char[] data) {
