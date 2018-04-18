@@ -1,0 +1,18 @@
+package com.example.lenovo.jd.view.alipay;
+
+public class AlipayConstants {
+
+    // 商户PID
+    public static final String PARTNER = "2088221871911835";
+    // 商户收款账号
+    public static final String SELLER = "zhuangshiyigou@163.com";
+    // 商户私钥，pkcs8格式
+    public static final String RSA_PRIVATE = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALmhW0c+ZO7sB3utNmkQu5hkpqnw+nAPLCdBoPEw+E+7qcOZBdXxwZsG05yr2BYp5j0MTE0FpKRu+uNTVTAX/MzhcInAColtnWkF1R8rsIdlLdleRoMcM3Lo4XesctdsyxLeummrFLKQfASMqS64kkTUoEFGb3tlYZs7iSFgpM1pAgMBAAECgYAGm6zhK2JycuqNR4xBTzwuX57jO9XeeVvMBfURwPmF9RtFAESJ6jJHL4YG9MMbfuBYWgC5WTMUO3Mo9oV40dHI9dPwANL5aPeKEIUawoQyuCyY/js84fOY3+TbEnXym8G6+Zxm+bGKQn3ZZqlSgR3CHk5f/CceoXvPWDLwl//RtQJBANzDaQTeckTUEtxVyZ9vM26Sv+TKULvqf8OHdrGm7WOWY6/CbChrxMKHxkdrNwZPNIhozNfTaOmnJaPqeMKo8SMCQQDXQmEPHj0h4Qjn3D6n6WiNOvUsNbzVpLP/TgwHFYkRLcz+GPRkbXXdvkSUKxNo7vwZr8vwTIquYA+K3CFTpr4DAkEAu3Ox2NCJdqgc27p8WUSzB1DUYBDqPKYBlqWPw4laSRWJz9Pmwuu/Ru7DDiGbt1/J24ohZaG9k6i57VVK9P8+wQJBAIgGtFrfWvY7xGrwbM+i2aTVqvTDCI9hQzWEVmlrnHA0pyOzFU0ZNrBneeK/zcYzry90PcWeOMy0e13eeVjpN40CQQCMBjVBeTdQ9afgGnBR6glIWrCtqTBAsUIr3gvNZYWdaznr0FmG2pjLwDLUsx0SUCpcrTQxhWu16HDEyQuCm7Ar";
+    // 支付宝公钥
+    public static final String RSA_PUBLIC = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgIjFFGnzyL16p8fG7Suzz8/AVTDKYM5bZ/4qaTaG3Ghtd5C9TlqI3VhCWtkBfEiTzmk9pP1D15uGtALyxR3I72QJcob41D9Azf3ZW4ZAMM+KqrH25RVPH6hIt6QYRFjmID80qe8ebVnzDILjCBUdsvJwG1DGHS41CVBLK6B330SOma9ItTOErI64ISXbxpnwR1a3anLkWkAnEGPTx2j/NF+pgq/miOYiEnsdg6CZNaQkjPauo8TggRjLOAWiSr/ZXN/4OkzTv7V4OiujnMKlRWbouqgHJrHUbW4ULH2FIr//vh6LU2NZriXs6I0uCl4oTfeyPYkl3r9YOj9fUqKGDQIDAQAB";
+//	public static final String RSA_PUBLIC = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
+
+    public static final int SDK_PAY_FLAG = 1;
+    public static final int SDK_CHECK_FLAG = 2;
+
+}
